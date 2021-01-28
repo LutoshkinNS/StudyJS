@@ -5,6 +5,6 @@ let deposit;
 let mission;
 let period;
 
-// alert('Внимание!');
+alert('Внимание!');
 
-// console.log('Тест');
+console.log('Тест');
