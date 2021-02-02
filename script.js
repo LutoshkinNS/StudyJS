@@ -34,22 +34,22 @@ showTypeOf(deposit);
 
 
 // Сумма всех обязательных расходов за месяц
-function getExpensesMonth(expense1, expense2) {
-	return expense1 + expense2;
+function getExpensesMonth(exp1, exp2) {
+	return exp1 + exp2;
 };
 
 
 // Накопления за месяц
-function getAccumulatedMonth(money, income, expense1, expense2) {
-	return money + income - (expense1 + expense2);
+function getAccumulatedMonth(salary, additionalIncome, exp1, exp2) {
+	return salary + additionalIncome - (exp1 + exp2);
 };
 
-let accumulatedMonth = getAccumulatedMonth(money, income, amount1, amount2);
+const accumulatedMonth = getAccumulatedMonth(money, income, amount1, amount2);
 
 
 // Срок достижения цели
-function getTargetMonth(mission, accumulatedMonth) {
-	return Math.ceil(Number(mission) / accumulatedMonth)
+function getTargetMonth(goal, accumulated) {
+	return Math.ceil(Number(goal) / accumulated)
 };
 
 
