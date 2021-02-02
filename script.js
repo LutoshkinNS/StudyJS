@@ -58,7 +58,7 @@ budgetDay = Math.floor(accumulatedMonth / 30);
 
 
 // Функция вычисления уровня дохода
-let getStatusIncome = function() {
+let getStatusIncome = function(budgetDay) {
 	if (budgetDay >= 1200) {
 		return ('У вас высокий уровень дохода');
 	} else if (budgetDay > 600 && budgetDay < 1200) {
@@ -80,4 +80,4 @@ console.log('Обязательные расходы: ', addExpenses.toLowerCase
 // console.log('Накопления за месяц: ', accumulatedMonth);
 console.log('Цель будет достигнута за ' + getTargetMonth(mission, accumulatedMonth) + ' месяцев(-а)');
 console.log('Бюджет на день: ', budgetDay);
-console.log(getStatusIncome());
+console.log(getStatusIncome(budgetDay));
