@@ -217,19 +217,11 @@ const checkValid = function () {
 	inputs.forEach (function (item) {
 		if (item.placeholder === 'Сумма') {
 			item.addEventListener('change', function () {
-				if (isNumber(item.value) || item.value === '') {
-					return true;
-				} else {
-					return alert('Ошибка, поле "Сумма" должно содержать цифры');
-				};
+					item.value = item.value.replace(/^\D+$/, '');
 			});
 		} else if (item.placeholder === 'Наименование') {
 			item.addEventListener('change', function () {
-				if (/^[А-Яа-яЁё.,-_?!":;()`\s]+$/.test(item.value) || item.value=== 	'') {
-					return true;
-				} else {
-					return alert('Ошибка, поле "Обязательные расходы" должносодержать 	только русские буквы и знаки препинания');
-				};
+					item.value = item.value.replace(/^[1-9]+$|[^А-Яа-яЁё.,-_?!":;()`\s]+$/, '');
 			});
 		};
 	});
