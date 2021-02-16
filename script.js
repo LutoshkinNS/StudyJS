@@ -271,9 +271,6 @@ let appData = {
 	},
 };
 
-console.log(appData);
-
-
 
 const removePlaceholder = function (cloneElement) {
 	for (let node of cloneElement.children) {
@@ -334,7 +331,6 @@ const initialization = function () {
 
 const initializationCansel = function () {
 	this.resetCalc();
-	console.log('cansel', this);
 };
 
 
