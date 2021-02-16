@@ -178,34 +178,6 @@ let appData = {
 		};
 	},
 
-	// getStatusIncome: function() {
-	// 	if (this.budgetDay >= 1200) {
-	// 		return ('У вас высокий уровень дохода');
-	// 	} 
-	// 		else if (this.budgetDay > 600 && this.budgetDay < 1200) {
-	// 			return ('У вас средний уровень дохода');
-	// 		} 
-	// 			else if (this.budgetDay >= 0 && this.budgetDay <= 600) {
-	// 				return ('К сожалению у вас уровень дохода ниже среднего');
-	// 			} 
-	// 				else {
-	// 					return ('Что то пошло не так');
-	// 				};
-	// },
-
-	// getInfoDeposit: function () {
-	// 	if (appData.deposit) {
-	// 		appData.percentDeposit = prompt('Какой годовой процент?', 10);
-	// 			while (!isNumber(appData.percentDeposit)) {
-	// 					appData.percentDeposit = prompt('Какой годовой процент? (Введите число)');
-	// 			};
-
-	// 		appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-	// 			while (!isNumber(appData.moneyDeposit)) {
-	// 					appData.moneyDeposit = prompt('Какая сумма заложена? (Введите число)');
-	// 			};
-	// 	};
-	// },
 
 	calcPeriod: function () {
 		console.log(this);
@@ -221,6 +193,11 @@ let appData = {
 		this.removesIncomesBlock();
 		this.removesContentSelect();
 		this.getStartBtn();
+		this.removeContentIncome();
+		this.removeContentExpenses();
+			
+		this.removeContentAppData();
+
 	},
 
 	removesContentInputs: function () {
@@ -241,6 +218,7 @@ let appData = {
 				item.remove();
 			};
 		});
+		expensesItems = document.querySelectorAll('.expenses-items');
 		expensesPlus.style.display = 'block';
 	},
 
@@ -250,6 +228,7 @@ let appData = {
 				item.remove();
 			};
 		});
+		incomesItems = document.querySelectorAll('.incomes-items');
 		incomesPlus.style.display = 'block';
 	},
 
@@ -262,10 +241,39 @@ let appData = {
 	getStartBtn: function () {
 		start.style.display = 'block';
 		cancel.style.display = 'none';
-	}
+	},
+
+	removeContentIncome: function () {
+		for (let key in this.income) {
+		delete this.income[key];
+	};
+	},
+
+	removeContentExpenses: function () {
+		for (let key in this.expenses) {
+		delete this.expenses[key];
+	};
+	},
+
+	removeContentAppData: function () {
+		this.budget = 0,
+		this.expenses = {},
+		this.expensesMonth = 0,
+		this.income = {},
+		this.incomeMonth = 0,
+		this.addIncome = [],
+		this.addExpenses = [],
+		this.deposit = false,
+		this.percentDeposit = 0,
+		this.moneyDeposit = 0,
+		this.budgetDay = 0,
+		this.budgetMonth = 0;
+	},
 };
 
 console.log(appData);
+
+
 
 const removePlaceholder = function (cloneElement) {
 	for (let node of cloneElement.children) {
@@ -313,6 +321,7 @@ const initialization = function () {
 	if (salaryAmount.value.trim() === '' || !isNumber(salaryAmount.value.trim())) {
 		start.disabled = true;
 		alert('Ошибка, поле "Месячный доход" должно быть заполнено');
+		return;
 	} else {
 		this.start();
 
@@ -322,8 +331,10 @@ const initialization = function () {
 	};
 };
 
+
 const initializationCansel = function () {
 	this.resetCalc();
+	console.log('cansel', this);
 };
 
 
