@@ -62,7 +62,7 @@ class AppData {
 	checkValid () {
 		let inputs = document.querySelectorAll('input');
 		
-		inputs.forEach (function (item) {
+		inputs.forEach ((item) => {
 			if (item.placeholder === 'Сумма' || item.className.includes('amount')) {
 				item.addEventListener('input', function () {
 					item.value = item.value.replace(/[^0-9]/,'');
@@ -121,7 +121,7 @@ class StartCalc extends AppData {
 
 	blockingInputs () {
 		let inputsTypeText = document.querySelectorAll('.data input[type=text]');
-			inputsTypeText.forEach(function(item){
+			inputsTypeText.forEach((item) => {
 				item.disabled = true;
 			});
 		incomesPlus.disabled = true;
@@ -166,7 +166,7 @@ class StartCalc extends AppData {
 	};
 
 	getIncome () {
-		incomesItems.forEach(function (item) {
+		incomesItems.forEach((item) => {
 			let itemIncome = item.querySelector('.income-title').value;
 			let cashIncome = item.querySelector('.income-amount').value;
 			if (itemIncome !== '' && cashIncome !== '') {
@@ -180,7 +180,7 @@ class StartCalc extends AppData {
 	};
 
 	getAddIncome () {
-		additionalIncomeItem.forEach(function (item) {
+		additionalIncomeItem.forEach((item) => {
 			let itemValue = item.value.trim();
 			if (itemValue !== '') {
 				this.addIncome.push(itemValue);
@@ -203,7 +203,7 @@ class StartCalc extends AppData {
 	};
 
 	getExpenses () {
-		expensesItems.forEach(function (item) {
+		expensesItems.forEach((item) => {
 			let itemExpenses = item.querySelector('.expenses-title').value;
 			let cashExpenses = item.querySelector('.expenses-amount').value;
 			if (itemExpenses !== '' && cashExpenses !== '') {
@@ -214,7 +214,7 @@ class StartCalc extends AppData {
 
 	getAddExpenses () {
 		let addExpenses = additionalExpensesItem.value.split(',');
-		addExpenses.forEach(function (item) {
+		addExpenses.forEach((item) => {
 			item = item.trim();
 			if (item !== ''){
 				this.addExpenses.push(item);
@@ -262,7 +262,7 @@ class StartCalc extends AppData {
 
 	// Удаляет содержимое всех input
 	removesContentInputs () {
-		inputs.forEach(function(item){
+		inputs.forEach((item) => {
 			item.value = '';
 		}, this);
 	};
@@ -271,7 +271,7 @@ class StartCalc extends AppData {
 	removesDisabletInputs () {
 		let inputsTypeText = document.querySelectorAll('.data input[type=text]');
 
-		inputsTypeText.forEach(function(item){
+		inputsTypeText.forEach((item) =>{
 			item.disabled = false;
 		}, this);
 		expensesPlus.disabled = false;
@@ -280,7 +280,7 @@ class StartCalc extends AppData {
 	
 	// Удаляет дополнительные поля "дополнительные доходы", возвращает кнопку плюс
 	removesIncomesBlock () {
-		incomesItems.forEach(function (item) {
+		incomesItems.forEach((item) => {
 			if (item !== incomesItems[0]) {
 				item.remove();
 			};
@@ -292,7 +292,7 @@ class StartCalc extends AppData {
 
 	// Удаляет дополнительные поля "обязательные расходы", возвращает кнопку плюс
 	removesExpensesBlock () {
-		expensesItems.forEach(function (item) {
+		expensesItems.forEach((item) => {
 			if (item !== expensesItems[0]) {
 				item.remove();
 			};
