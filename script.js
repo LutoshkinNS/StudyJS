@@ -220,9 +220,11 @@ class StartCalc extends AppData {
 
 	getAddExpenses () {
 		let addExpenses = additionalExpensesItem.value.split(',');
+
 		addExpenses.forEach((item) => {
 			item = item.trim();
 			if (item !== ''){
+				item = convertFirstLetterToUpperCase(item);
 				this.addExpenses.push(item);
 			};
 		}, this);
