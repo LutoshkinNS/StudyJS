@@ -8,10 +8,6 @@ const isStartString = function (string) {
 	return /^\D+$/.test(string);
 };
 
-const convertFirstLetterToUpperCase = function (string) {
-	return string[0].toUpperCase() + string.slice(1);
-};
-
 
 const start = document.getElementById('start'),
 	cancel = document.getElementById('cancel'),
@@ -213,25 +209,28 @@ class StartCalc extends AppData {
 	};
 
 	getAddExpInc () {
-		const satrtStr = item.parentNode.className.split('-')[0];
-		// console.log('satrtStr: ', satrtStr);
 		
-		const count = (item) => {
-			console.log('item: ', item.itemName);
+		const count = (elem) => {
+			let satrtStr = elem.parentNode.className.split('_')[1];
+				satrtStr = satrtStr.toUpperCase()[0] + satrtStr.slice(1);
+			
+			const arr = elem.value.split(',');
 
-			// item = item.trim();
-			// if (item !== ''){
-			// 	this.addExpenses.push(item);
-			// };
+			arr.forEach((item) => {
+				item = item.trim();
+					if (item !== '') {
+						item = item[0].toUpperCase() + item.slice(1);
+						this['add' + satrtStr].push(item);
+					};
+			}, this);
 		};
 
-		const addExpenses = additionalExpensesItem.value.split(',');
-		console.log('addExpenses: ', addExpenses);
-		addExpenses.forEach(count, this);
+		count(additionalExpensesItem);
 
-		// additionalIncomeItem.forEach((item) => {
-		// 	item.value.count();
-		// }, this);
+		additionalIncomeItem.forEach ((item) => {
+			count(item);
+		}, this);
+
 	};
 
 	getExpensesMonth () {
