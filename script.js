@@ -189,25 +189,7 @@ class StartCalc extends AppData {
 		};
 	};
 
-	getAddIncome () {
-		additionalIncomeItem.forEach((item) => {
-			let itemValue = item.value.trim();
-			if (itemValue !== '') {
-				this.addIncome.push(itemValue);
-			};
-		}, this);
-	};
-
-	getAddExpenses () {
-		let addExpenses = additionalExpensesItem.value.split(',');
-		addExpenses.forEach((item) => {
-			item = item.trim();
-			if (item !== ''){
-				this.addExpenses.push(item);
-			};
-		}, this);
-	};
-
+	// Возвращает массивы "addIncome" и "addExpenses" из полей "Возможный доход" и "Возможный расход".
 	getAddExpInc () {
 		
 		const count = (elem) => {
