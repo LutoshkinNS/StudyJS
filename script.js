@@ -89,10 +89,8 @@ class StartCalc extends AppData {
 		this.getValuePeriodSelected();
 		salaryAmount.addEventListener('change', () => {start.disabled = false});
 		start.addEventListener('click', this.startCalc.bind(this));
-		incomesPlus.addEventListener('click', this.addBlock.call(this, incomesItems, incomesPlus));
-		// expensesPlus.addEventListener('click', this.addBlock.bind(this));
-		// expensesPlus.addEventListener('click', this.addBlock(expensesItems, expensesPlus));
-
+		expensesPlus.addEventListener('click', this.addBlock);
+		incomesPlus.addEventListener('click', this.addBlock);
 		periodSelect.addEventListener('input', this.getValuePeriodSelected.bind(this));
 		cancel.addEventListener('click', this.resetCalc.bind(this));
 	};
@@ -111,12 +109,12 @@ class StartCalc extends AppData {
 	getData () {
 		this.budget = +salaryAmount.value;
 		this.getIncExp();
-		this.getAddIncome();
 		this.getExpensesMonth();
-		this.getAddExpenses();
+		this.getAddExpInc();
 		this.getBudget();
 
 		this.showResult();
+
 	};
 
 	blockingInputs () {
@@ -151,71 +149,43 @@ class StartCalc extends AppData {
 		};
 	};
 
-	addIncomesBlock () {
-		let cloneIncomesItem = incomesItems[0].cloneNode(true);
-		incomesItems[0].parentNode.insertBefore(cloneIncomesItem, incomesPlus);
+	// Добавляет блоки в "дополнительные доходы" и "обязательные расходы".
+	addBlock (event) {
+		const btnPlus = event.target;
+		const itemName = btnPlus.parentNode.className;
 
-		this.removePlaceholder(cloneIncomesItem);
-
-		incomesItems = document.querySelectorAll('.income-items');
-
-			if (incomesItems.length === 3) {
-				incomesPlus.style.display = 'none';
-			};
-		this.checkValid();
-	};
-
-	addExpensesBlock () {
-		let cloneExpensesItem = expensesItems[0].cloneNode(true);
-		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
-
-		this.removePlaceholder(cloneExpensesItem);
-
-		expensesItems = document.querySelectorAll('.expenses-items');
-
-			if (expensesItems.length === 3) {
-				expensesPlus.style.display = 'none';
-			};
-		this.checkValid();
-	};
-
-	addBlock (items, btnPlus) {
-		// const adds = function (items, btnPlus) {
-			console.log('items: ', items);
-			console.log('btnPlus: ', btnPlus);
-			// let cloneItem = items[0].cloneNode(true);
-			// items[0].parentNode.insertBefore(cloneItem, btnPlus);
-			const satrtStr = items[0].className.split('-')[0];
-			console.log('satrtStr: ', satrtStr);
-			items = document.querySelectorAll(`.${satrtStr}-items`);
-			console.log('items2: ', items);
-
-			// this.removePlaceholder(cloneItem);
-			items = document.querySelectorAll(`.${satrtStr}-items`);
-
-			if (items.length === 3) {
-				btnPlus.style.display = 'none';
-			};
-		// };
+		let items = document.querySelectorAll(`.${itemName}-items`);
 		
-		// adds(incomesItems, incomesPlus);
-			// expensesPlus.addEventListener('click', adds(expensesItems, expensesPlus));
+		let cloneItem = items[0].cloneNode(true);
+		items[0].parentNode.insertBefore(cloneItem, btnPlus);
 
-		this.checkValid();
+		for (let node of cloneItem.children) {
+			node.value = '';
+			node.placeholder = '';
+		};
+		
+		if (items.length === 3) {
+			btnPlus.style.display = 'none';
+		};
+		
+		super.checkValid();
 	};
 	
 	// Получает данные "Дополнительные доходы", "Обязательные расходы". Записывает в объекты "income", "expenses".
 	getIncExp () {
 		const count = (item) => {
 			const satrtStr = item.className.split('-')[0];
-			const itemTitle = document.querySelector(`.${satrtStr}-title`).value;
-			const itemAmount = document.querySelector(`.${satrtStr}-amount`).value;
+			const itemTitle = item.querySelector(`.${satrtStr}-title`).value;
+			const itemAmount = item.querySelector(`.${satrtStr}-amount`).value;
 				if (itemTitle !== '' && itemAmount !== '') {
 					this[satrtStr][itemTitle] = +itemAmount;
 				};
 		};
 
+		incomesItems = document.querySelectorAll('.income-items');
 		incomesItems.forEach(count, this);
+
+		expensesItems = document.querySelectorAll('.expenses-items'),
 		expensesItems.forEach(count, this);
 
 		for (let key in this.income) {
@@ -240,6 +210,28 @@ class StartCalc extends AppData {
 				this.addExpenses.push(item);
 			};
 		}, this);
+	};
+
+	getAddExpInc () {
+		const satrtStr = item.parentNode.className.split('-')[0];
+		// console.log('satrtStr: ', satrtStr);
+		
+		const count = (item) => {
+			console.log('item: ', item.itemName);
+
+			// item = item.trim();
+			// if (item !== ''){
+			// 	this.addExpenses.push(item);
+			// };
+		};
+
+		const addExpenses = additionalExpensesItem.value.split(',');
+		console.log('addExpenses: ', addExpenses);
+		addExpenses.forEach(count, this);
+
+		// additionalIncomeItem.forEach((item) => {
+		// 	item.value.count();
+		// }, this);
 	};
 
 	getExpensesMonth () {
