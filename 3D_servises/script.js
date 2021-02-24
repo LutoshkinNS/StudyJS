@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Timer
 	const countTimer = deadline => {
-		const timerHours = document.getElementById('timer-hours'),
+		const timerWrap = document.getElementById('timer'),
+			timerHours = document.getElementById('timer-hours'),
 			timerMinutes = document.getElementById('timer-minutes'),
 			timerSeconds = document.getElementById('timer-seconds');
 
@@ -16,17 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			return { timeRemaining, hours, minutes, seconds };
 		};
 
+		const addsZero = number => {
+			if (String(number).length === 1) {
+				return '0' + number;
+			} else {
+				return number;
+			}
+		};
 
 		const updateClock = () => {
 			const timer = getTimeRemaining();
 
-			timerHours.textContent = ('0' + timer.hours).slice(-2);
-			timerMinutes.textContent = ('0' + timer.minutes).slice(-2);
-			timerSeconds.textContent = ('0' + timer.seconds).slice(-2);
+			timerHours.textContent = addsZero(timer.hours);
+			timerMinutes.textContent = addsZero(timer.minutes);
+			timerSeconds.textContent = addsZero(timer.seconds);
 
 			if (timer.timeRemaining <= 0) {
 				// eslint-disable-next-line no-use-before-define
 				clearInterval(startTimer);
+				timerHours.textContent = '00';
+				timerMinutes.textContent = '00';
+				timerSeconds.textContent = '00';
+				timerWrap.style.color = 'red';
 			}
 		};
 
@@ -34,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	};
 
-	countTimer('24 feb 2021');
+	countTimer('25 feb 2021');
 
 	// Menu
 	const toggleMenu = () => {
@@ -100,6 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
 				requestAnimationFrame(animate);
 			}
 
+		});
+	}
+
+	// Scroll
+	const anchors = document.querySelectorAll('a[href*="#"]');
+
+	for (const anchor of anchors) {
+		anchor.addEventListener('click', event => {
+			event.preventDefault();
+
+			const blockID = anchor.getAttribute('href').substring(1);
+
+			document.getElementById(blockID).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
 		});
 	}
 
