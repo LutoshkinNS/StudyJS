@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					handlerMenu();
 				} else {
 					target = target.closest('ul>li');
-					if (target) {
+					if (menu.contains(target)) {
 						handlerMenu();
 					} else {
 						target = event.target;
