@@ -314,22 +314,23 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// inputsValidation
-	document.addEventListener('change', event => {
+	document.addEventListener('input', event => {
 		const target = event.target;
 		let text = target.value;
 
-		target.addEventListener('blur', () => {
-			if (target.matches('.form-name') || target.matches('.mess')) {
-				target.value = text.replace(/[^А-Яа-яЁё\\ \\-]/g, '');
-			} else if (target.matches('.form-email')) {
-				target.value = text.replace(/[^A-z\\@\\-\\_\\.\\!\\~\\*\\']/g, '');
-			} else if (target.matches('.form-phone')) {
-				target.value = text.replace(/[^\d\\()\\-]/g, '');
-			}
+		if (target.matches('.form-name') || target.matches('.mess')) {
+			target.value = text.replace(/[^А-Яа-яЁё\\ \\-]/g, '');
+		} else if (target.matches('.form-email')) {
+			target.value = text.replace(/[^A-z\\@\\-\\_\\.\\!\\~\\*\\']/g, '');
+		} else if (target.matches('.form-phone')) {
+			target.value = text.replace(/[^\d\\()\\-]/g, '');
+		}
 
+		target.addEventListener('blur', () => {
 			text = target.value;
 			text = text.replace(/\s+/g, ' ');
 			text = text.replace(/-+/g, '-');
+			text = text.replace(/@+/g, '@');
 			text = text.replace(/^ |^-| $|-$/g, '');
 
 			if (target.matches('.form-name')) {
