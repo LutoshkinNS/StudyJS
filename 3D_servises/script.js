@@ -335,7 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			text = text.replace(/^ |^-| $|-$/g, '');
 
 			if (target.matches('.form-name')) {
-				text = text.replace(/^./g, match => match.toUpperCase());
+				text = text.replace(/.+/g, match => match.toLowerCase());
+				text = text.replace(/(^|\s|-)\S/g, match => match.toUpperCase());
 			}
 
 			target.value = text;
