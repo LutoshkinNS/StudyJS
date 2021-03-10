@@ -11,7 +11,7 @@ import sendForm from './modules/sendForm';
 
 
 // Timer
-countTimer('25 feb 2021');
+countTimer('12 mar 2021');
 // Menu
 toggleMenu();
 // Scroll
