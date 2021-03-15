@@ -17,7 +17,7 @@ const validation = () => {
 		if (target.matches('.form-name')) {
 			target.value = text.replace(/[^А-Яа-яЁё\\ ]/g, '');
 		} else if (target.matches('.form-email')) {
-			target.value = text.replace(/[^A-z\\@\\-\\_\\.\\!\\~\\*\\']/g, '');
+			target.value = text.replace(/[^A-z\\@\\-\\_\\.\\!\\~\\*\\'\\ ]/g, '');
 		} else if (target.matches('.form-phone')) {
 			target.value = text.replace(/[^\d\\()\\-\\+]/g, '');
 		} else if (target.matches('.mess')) {
