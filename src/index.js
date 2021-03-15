@@ -11,7 +11,7 @@ import sendForm from './modules/sendForm';
 
 
 // Timer
-countTimer('12 mar 2021');
+countTimer('22 mar 2021');
 // Menu
 toggleMenu();
 // Scroll
@@ -27,6 +27,6 @@ replaceImg();
 // Validation
 validation();
 // calc
-calc(100);
+calc(1000);
 // send-ajax-form
 sendForm();

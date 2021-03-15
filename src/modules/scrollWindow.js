@@ -2,6 +2,10 @@ const scrollWindow = () => {
 	const anchors = document.querySelectorAll('a[href*="#"]');
 
 	for (const anchor of anchors) {
+
+		// Исключая все якори с классами
+		if (anchor.className) return;
+
 		anchor.addEventListener('click', event => {
 			event.preventDefault();
 

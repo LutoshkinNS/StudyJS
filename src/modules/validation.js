@@ -32,12 +32,17 @@ const validation = () => {
 			text = text.replace(/@+/g, '@');
 			text = text.replace(/^ |^-| $|-$/g, '');
 
+			if (target.matches('.form-name') && !(/[А-Яа-яЁё]{2,}/g).test(text)) {
+				text = '';
+			} else if (target.matches('.form-phone') && !(/^.?([0-9]{7,13})$/g).test(text)) {
+				text = '';
+			}
 			if (target.matches('.form-name')) {
 				text = text.replace(/.+/g, match => match.toLowerCase());
 				text = text.replace(/(^|\s|-)\S/g, match => match.toUpperCase());
 			}
 
-			target.value = text;
+			target.value = text.trim();
 		});
 	});
 };

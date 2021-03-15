@@ -1,6 +1,6 @@
 import animate from './animate';
 
-const calc = (price = 100) => {
+const calc = (price = 1000) => {
 
 	const calckBlock = document.querySelector('.calc-block'),
 		calcType = document.querySelector('.calc-type'),
@@ -37,7 +37,8 @@ const calc = (price = 100) => {
 					totalValue.textContent = Math.floor(total * progress);
 				}
 			});
-		} else if (typeValue === 0 || squareValue === 0) {
+		} else if (typeValue === '' || squareValue === 0) {
+			console.log('typeValue: ', typeValue);
 			animate({
 				duration: 800,
 				timing(timeFraction) {
